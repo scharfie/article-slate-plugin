@@ -56,7 +56,7 @@ module ArticlesHelper
   end
   
   def article_tools(article)
-    partial :article_tools, :locals => { :article => article }
+    render :partial => 'builder/article_tools', :locals => { :article => article }
   end
   
   def archive_date(format=':nmonth :year')
