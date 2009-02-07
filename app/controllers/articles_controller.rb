@@ -3,16 +3,9 @@ class ArticlesController < ResourcesController
   current_tab 'Articles'
   include PeriodicalsHelper
   
-  before_filter :enable_articles_page
-  
 protected
   def publish_resource!
     resource.publish!(resource.published_at)
-  end
-  
-  def enable_articles_page
-    @page = Page.new(:name => 'Articles')
-    def @page.id; 'articles'; end
   end
 
 public
@@ -26,7 +19,7 @@ public
   # can be visible exactly as it will appear
   # on the blog)
   def resource_url(*args)
-    space_page_url @space, @page,
+    space_page_url @space, 'articles',
       hash_for_periodical_path(resource)
   end
 
@@ -34,19 +27,19 @@ public
     wants.html { redirect_to resources_path }
   end
   
-  # # Publishes the article
-  # def publish
-  #   self.resource = find_resource
-  #   publish_resource!
-  #   flash[:notice] = 'Succesfully published article!'
-  #   redirect_to resource_url
-  # end
-  # 
-  # # Unpublishes the article
-  # def unpublish
-  #   self.resource = find_resource
-  #   resource.unpublish!
-  #   flash[:notice] = 'Successfully unpublished article!'
-  #   redirect_to resource_url
-  # end
+  # Publishes the article
+  def publish
+    self.resource = find_resource
+    publish_resource!
+    flash[:notice] = 'Succesfully published article!'
+    redirect_to resource_url
+  end
+  
+  # Unpublishes the article
+  def unpublish
+    self.resource = find_resource
+    resource.unpublish!
+    flash[:notice] = 'Successfully unpublished article!'
+    redirect_to resource_url
+  end
 end

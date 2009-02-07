@@ -13,4 +13,13 @@ class ArticlePlugin < Slate::Plugin
       }
     end
   end
+  
+  mount 'articles', :name => 'Articles', :template => 'blog.html.erb'
+
+  # Possible future syntax
+  # mount 'articles' do |m|
+  #   m.helper 'ArticlesHelper'
+  #   m.page.name = 'Articles'
+  #   m.page.template = 'blog.html.erb'
+  # end
 end

@@ -12,7 +12,7 @@
           <li><small>Recently published:</small></li>
           <% @published.each do |article| %>
             <li>
-              <%= link_to article.name, space_page_path(@space, @page, hash_for_periodical_path(article)) %>
+              <%= link_to article.name, space_page_path(@space, 'articles', hash_for_periodical_path(article)) %>
               <span class="actions">
               -
               <%= link_to glyph('pencil'), edit_resource_path(article.draft_version) %>

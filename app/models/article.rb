@@ -35,3 +35,4 @@ public
 end
 
 Space.has_many :articles
+# Page.mount(:name => 'Articles', :key => '')

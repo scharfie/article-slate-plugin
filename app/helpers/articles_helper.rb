@@ -1,6 +1,11 @@
-module BlogsHelper
+require_dependency 'article'
+
+module ArticlesHelper
   # Renders blog
-  def blog_engine
+  def article_engine
+    # legacy support for old blog plugin
+    @blog = @space
+    
     if periodicals_by_day?
       '- Show articles for day'
       debug @space.articles.find_by_date(params[:year], params[:month], params[:day])
@@ -16,6 +21,8 @@ module BlogsHelper
       show_recent_articles
     end
   end
+  
+  alias_method :blog_engine, :article_engine
   
   def show_articles_by_month
     @articles = @space.articles.published.on_date(params[:year], params[:month])
