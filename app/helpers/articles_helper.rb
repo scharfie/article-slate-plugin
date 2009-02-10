@@ -62,4 +62,10 @@ module ArticlesHelper
   def archive_date(format=':nmonth :year')
     @archive.eztime(format)
   end
+  
+  def article_feed_url
+    options = { :controller => 'articles', :action => 'feed', :only_path => false }
+    options.merge!(:page_path => params[:page_path]) unless params[:page_path].blank?
+    url_for(options)
+  end
 end

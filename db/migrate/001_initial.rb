@@ -1,4 +1,4 @@
-class CreateArticles < ActiveRecord::Migration
+class Initial < ActiveRecord::Migration
   def self.up
     create_table :articles do |t|
       t.integer  :space_id
@@ -11,9 +11,15 @@ class CreateArticles < ActiveRecord::Migration
       t.datetime :published_at
       t.timestamps
     end
+    
+    create_table :article_settings do |t|
+      t.string   :name
+      t.text     :description
+    end
   end
 
   def self.down
     drop_table :articles
+    drop_table :article_settings
   end
 end

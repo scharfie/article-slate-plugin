@@ -2,13 +2,24 @@ class ArticlesController < ResourcesController
   resources_controller_for :articles, :in => :space
   current_tab 'Articles'
   include PeriodicalsHelper
-  
+
+  # Allow RSS
+  skip_filter :load_enclosing_resources, :only => 'feed'
+
 protected
   def publish_resource!
     resource.publish!(resource.published_at)
   end
 
 public
+  def feed
+    self.resources = @space.articles.published(:limit => 10, :order => 'published_at DESC')
+
+    respond_to do |wants|
+      wants.rss
+    end
+  end
+
   def index
     @published = resource_service.published.all
     @unpublished = resource_service.unpublished.all(:limit => 10, :order => 'published_at DESC')

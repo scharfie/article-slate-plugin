@@ -27,11 +27,11 @@
           <li><small>Never published:</small></li>
           <% @unpublished.each do |article| %>
             <li>
-              <%= link_to article.name, space_page_path(@space, blog.page, hash_for_periodical_path(article)) %>
+              <%= link_to article.name, space_page_path(@space, 'articles', hash_for_periodical_path(article)) %>
               <span class="actions">
               -
-              <%= link_to glyph('pencil'), edit_resource_article_path(blog, article.draft_version) %>
-              <%= link_to glyph('delete'), resource_article_path(blog, article.draft_version), :method => :delete %>
+              <%= link_to glyph('pencil'), edit_resource_path(article.draft_version) %>
+              <%= link_to glyph('delete'), resource_path(article.draft_version), :method => :delete %>
               </span>
             </li>  
           <% end %>
