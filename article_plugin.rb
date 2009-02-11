@@ -1,5 +1,5 @@
 class ArticlePlugin < Slate::Plugin
-  name 'Articles my friend'
+  name 'Articles'
   description 'Create blog articles for your site'
   
   navigation do |tabs|
