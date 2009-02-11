@@ -1,0 +1,6 @@
+<h2>Recent</h2>
+<ul>
+  <% @space.articles.published.all(:limit => 10, :order => 'published_at DESC').each do |article| %>
+    <li><%= article_link article %></li>
+  <% end %>
+</ul>

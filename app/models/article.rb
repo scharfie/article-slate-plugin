@@ -12,7 +12,7 @@ public
   def self.archives
     self.find(:all,
       :select => "DISTINCT #{connection.year('published_at')} AS year, #{connection.month('published_at')} AS month",
-      :conditions => ['published_at <= ? && version = 1', Time.now],
+      :conditions => ['published_at <= ? && version = 1', Time.now.utc],
       :order => "published_at DESC"
     ).map { |e| Archive.new(Time.local(e.year, e.month)) }
   end 
