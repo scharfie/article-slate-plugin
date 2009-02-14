@@ -31,16 +31,15 @@ module ArticlesHelper
   end
   
   def show_article_by_slug
-    @article = @space.articles.published.find_by_permalink(params[:slug])
-    if editor? && @article.nil?
-      @article = @space.articles.unpublished.find_by_permalink(params[:slug])
-    end  
+    scope = editor? && slate? ? :draft : :published
+    @article = @space.articles.send(scope).find_by_permalink(params[:slug])
     partial :article, :object => @article
   end
   
   def show_recent_articles
-    # scope = editor? && slate? ? :updated : :published
-    @articles = @space.articles.published.all(:limit => 5, :order => 'published_at DESC')
+    scope = editor? && slate? ? :draft : :published
+    order = editor? && slate? ? 'updated_at DESC' : 'published_at DESC'
+    @articles = @space.articles.send(scope).all(:limit => 5, :order => order)
     partial :article, :collection => @articles
   end
   

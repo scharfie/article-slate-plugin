@@ -2,13 +2,13 @@
 
 <%= form.text_field :name %>
 <%= form.text_area :body, :style => 'width: 600px' %>
-<%= form.datetime_select :published_at, :label => 'Publish time', :tip => '(<a id="set_to_now" href="#">Set to now</a>)' %>
+<%= form.datetime_select :published_at, :label => 'Publish time' %>
 
 <script type="text/javascript" charset="utf-8">
 Time = function(date) {
   this.date   = date
   this.year   = this.date.getFullYear() 
-  this.month  = this.date.getMonth() 
+  this.month  = this.date.getMonth() + 1
   this.day    = this.date.getDate() 
   this.hour   = this.date.getHours() 
   this.minute = this.date.getMinutes() 
@@ -18,6 +18,7 @@ Time = function(date) {
 Time.now = function() { return new Time(new Date()) }
 
 $(function() {
+  $('#article_published_at_5i').after('<br />(<a id="set_to_now" href="#">Set to now</a>)')
   $('#set_to_now').click(function() {
     var now = Time.now()
     $('#article_published_at_1i').val(now.year)
