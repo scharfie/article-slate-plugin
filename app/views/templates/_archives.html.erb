@@ -1,6 +1,6 @@
 <h2>Archives</h2>
 <ul class="archives">
-  <% @space.articles.archives.each do |archive| %>
-    <li><%= link_to archive.eztime(':nmonth :year'), periodical_url(archive, :slug => nil, :day => nil) %></li>
+  <% articles.archives.each do |archive| %>
+    <li><%= link_to archive_date(archive), periodical_url(archive, :day => nil) %></li>
   <% end %>
 </ul>

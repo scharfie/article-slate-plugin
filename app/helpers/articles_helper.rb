@@ -27,13 +27,16 @@ module ArticlesHelper
   def show_articles_by_month
     @articles = @space.articles.published.on_date(params[:year], params[:month])
     @archive  = Article::Archive.new(Date.new(params[:year].to_i, params[:month].to_i, 1))
-    partial :articles_by_month, :object => @articles
+    partial :articles_by_month, :locals => { 
+      :articles_by_month => @articles,
+      :archive => @archive
+    }
   end
   
   def show_article_by_slug
     scope = editor? && slate? ? :draft : :published
     @article = @space.articles.send(scope).find_by_permalink(params[:slug])
-    partial :article, :object => @article
+    partial :article, :locals => { :article => @article }
   end
   
   def show_recent_articles
@@ -58,13 +61,21 @@ module ArticlesHelper
     render :partial => 'builder/article_tools', :locals => { :article => article }
   end
   
-  def archive_date(format=':nmonth :year')
-    @archive.eztime(format)
+  def archive_date(archive, format=':nmonth :year')
+    archive.eztime(format)
   end
   
   def article_feed_url
     options = { :controller => 'articles', :action => 'feed', :only_path => false }
     options.merge!(:page_path => params[:page_path]) unless params[:page_path].blank?
     url_for(options)
+  end
+  
+  def articles_page
+    @articles_page ||= @space.pages.ensure_mount('articles')
+  end
+  
+  def articles
+    @space.articles
   end
 end

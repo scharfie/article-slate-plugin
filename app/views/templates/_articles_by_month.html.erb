@@ -1,6 +1,6 @@
-<h2>Archives &mdash; <%= archive_date %></h2>
+<h2>Archives &mdash; <%= archive_date(archive) %></h2>
 <ul class="archives">
-  <% @articles.each do |article|  %>
+  <% articles_by_month.each do |article|  %>
     <li><%= article_link article %></li>
   <% end %>
 </ul>
