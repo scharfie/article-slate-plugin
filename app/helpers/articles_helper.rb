@@ -1,6 +1,8 @@
 require_dependency 'article'
 
 module ArticlesHelper
+  unloadable
+  
   # Renders blog
   def article_engine
     # legacy support for old blog plugin
