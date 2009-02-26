@@ -1,3 +1,5 @@
-name: Article slate plugin
+name: Articles
 author: Chris Scharf
-description: Provides support for creating a blog with articles
+description: |
+  slate plugin which provides support for 
+  creating a blog with articles
