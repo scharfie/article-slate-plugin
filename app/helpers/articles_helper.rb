@@ -1,7 +1,7 @@
 require_dependency 'article'
 
 module ArticlesHelper
-  unloadable
+  # unloadable
   
   # Renders blog
   def article_engine

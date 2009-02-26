@@ -1,5 +1,5 @@
 class ArticlesController < ResourcesController
-  unloadable
+  # unloadable
   resources_controller_for :articles, :in => :space
   current_tab 'Articles'
   include PeriodicalsHelper
